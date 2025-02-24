@@ -1,0 +1,10 @@
+<div class="container py-5">
+    <h1 class="my-5">Les articles API</h1>
+    <p class="text-end">
+        <a class="btn btn-primary" [routerLink]="['/create']">Ajouter</a>
+    </p>
+   
+    <app-article  *ngFor="let article of articles"   [article]="article"></app-article>
+    
+</div>
+

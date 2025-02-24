@@ -1,0 +1,46 @@
+<div class="container py-5">
+    <h1 class="mb-4">Enregistrement</h1>
+    <form [formGroup]="registerForm" (submit)="save()">
+        <!-- Champ fullname -->
+        <div class="mb-3">
+            <label for="fullname" class="form-label">Nom complet</label>
+            <input
+              type="fullname"
+              id="email"
+              class="form-control"
+              formControlName="fullName"
+              placeholder="Entrez nom entier">
+          </div>
+      <!-- Champ Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Adresse email</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="Entrez votre email">
+      </div>
+      <!-- Champ Mot de passe -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Mot de passe</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Entrez votre mot de passe">
+      </div>
+      <!-- Bouton de soumission -->
+      <button type="submit" class="btn btn-primary">S'enregistrer</button>
+    </form>
+  
+    <!-- Affichage d'un message après soumission -->
+    <div *ngIf="submitted" class="mt-3">
+      <div class="alert alert-success">
+        Enregistrement réussi : <strong></strong> 
+      </div>
+    </div>
+  </div>
+  
+

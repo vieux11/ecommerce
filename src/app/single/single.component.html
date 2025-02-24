@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img src="{{article?.image}}" alt="" class="img-fluid">
+        </div>
+        <div class="col p-3">
+            <h1>{{article?.title}}</h1>
+            <p class="fs-2 fw-lighter">{{article?.category}}</p>
+            <hr>
+            <div class="my-5">
+                <p class="fw-lighter">Note : {{article?.rate}}</p>
+                <p class="fw-bold">{{article?.count}} <span class="text-success">en stock</span></p>
+            </div>
+            <p class="fs-1 text-danger">{{article?.price}}</p>
+            <div class="p-3 bg bg-light">{{article?.description}}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="container py-5">
+    <h1 class="my-5">Enregistrer un article</h1>
+    <div *ngIf="isOpen" class="alert alert-success alert-dismissible fade show" role="alert">
+        Enregistrement réussi!
+        <button (click)="close()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form [formGroup]="applyForm" (submit)="save()">
+                <p>Titre : <input type="text" formControlName="title" class="form-control"></p>
+                <p>Catégorie : <input type="text" formControlName="category" class="form-control"></p>
+                <p>Prix : <input type="text" formControlName="price" formclass="form-control"></p>
+                <p>Image : <input type="text" formControlName="image" class="form-control"></p>
+                <p>Note : <input type="text" formControlName="rate" class="form-control"></p>
+                <p>Stock : <input type="text" formControlName="count" class="form-control"></p>
+                <p>Description : <textarea name="" id="" formControlName="description" class="form-control"></textarea></p>
+                <p><button type="submit" class="btn btn-primary">Valider</button></p>
+            </form>
+        </div>
+    </div>
+</div>

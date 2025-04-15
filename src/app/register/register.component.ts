@@ -24,13 +24,8 @@ export class RegisterComponent {
           this.registerForm.value.fullName??"",
           this.registerForm.value.email??"",
           this.registerForm.value.password??"",
-        ).then((userApi:User)=>{
-          this.service.users.unshift(userApi)
-        })
+        ).subscribe()
         this.submitted = true
-        
-    
-    
       this.registerForm = new FormGroup({
       fullName: new FormControl(''),
       email: new FormControl(''),

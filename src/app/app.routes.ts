@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { ArticleListComponent } from './article-list/article-list.component';
 import { SingleComponent } from './single/single.component';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';

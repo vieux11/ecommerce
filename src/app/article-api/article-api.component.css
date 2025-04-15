@@ -1,0 +1,28 @@
+/* Toast stylé */
+.custom-toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1055;
+    min-width: 280px;
+    max-width: 100%;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Barre de recherche */
+  .search-bar {
+    max-width: 700px;
+  }
+  

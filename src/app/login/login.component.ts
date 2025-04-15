@@ -1,9 +1,10 @@
 import { NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { User, UserLogin } from '../models/user';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   user!: UserLogin
+
   service:UserService=inject(UserService)
+  auth:AuthService=inject(AuthService)
   submitted: boolean = false;
   router:Router=inject(Router)
   loginForm = new FormGroup({
@@ -25,18 +28,18 @@ export class LoginComponent {
       this.loginForm.value.email ?? "",
       this.loginForm.value.password ?? ""
     )
-    .then((response:UserLogin) => {
+    .subscribe((response:UserLogin) => {
+      console.log(response)
       this.user=response;
       if(response.token) {
-        localStorage.setItem('token', response.token.token)
-        localStorage.setItem('nom', response.user.fullName)
-        localStorage.setItem('email', response.user.email)
+        this.auth.loginSuccess(response.token.token, response.user.fullName);
         this.router.navigate(['/articles-api']);
       }
       else{
         this.submitted = true;
       }
-    }).then(() => location.reload())
+    })
+    //.then(() => location.reload())
     
   }
   close(){

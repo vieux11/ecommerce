@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User, UserLogin } from '../models/user';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,43 +11,29 @@ export class UserService {
   baseUrl: string = 'http://localhost:3333'
 
   //constructor() { }
-  
-  async register(fullName:string, email: string, password: string):Promise<User> {
+  constructor(private http: HttpClient) {}
+  register(fullName:string, email: string, password: string): Observable<User> {
     const user: User = {
       fullName: fullName,
       email: email,
       password: password
     }
-    let rep= await fetch(`${this.baseUrl}/users`,{
-      method: 'POST',
-      body: JSON.stringify(user),
+    return this.http.post<User>(`${this.baseUrl}/users`, user,{
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
       }
-    })
-    .then(res => res.json());
-    return rep;
+    });
   }
-  async login(email: string, password: string): Promise<UserLogin> {
+  login(email: string, password: string): Observable <UserLogin> {
     const credentials = { email, password };
+    console.log('Données envoyées:', credentials);
   
-    const response = await fetch(`${this.baseUrl}/login`, {
-      method: 'POST',
+    return this.http.post<UserLogin>(`${this.baseUrl}/login`, credentials, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       },
-      body: JSON.stringify(credentials)
     });
-  
-    // On convertit la réponse en JSON
-    const data = await response.json();
-  
-    // data devrait être de la forme :
-    // {
-    //   "user": { ... },
-    //   "token": { "type": "bearer", "token": "oat_...", ... }
-    // }
-    return data;
+
   }
   
 }

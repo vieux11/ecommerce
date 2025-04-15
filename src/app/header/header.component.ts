@@ -1,25 +1,28 @@
-import { Component, inject } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [RouterLink, NgIf],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  isConnected: boolean = false;
-  nom!: string
+  isConnected = signal<boolean>(false);
+  nom = signal<string>('');
   router:Router=inject(Router)
-  ngOnInit(){
-    if(localStorage.getItem('token')){
-      this.isConnected=true;
-      this.nom=localStorage.getItem('nom')!;
-    }
+  constructor( public auth: AuthService){}
+  // Vérifie si l'on est sur la page des articles
+
+  isArticlesPage(): boolean {
+    return this.router.url === '/articles-api';
   }
+  
   deconnexion(){
-    localStorage.clear();
-    this.isConnected = false;
+    this.auth.logout()
     this.router.navigate(['/'])
   }
 }

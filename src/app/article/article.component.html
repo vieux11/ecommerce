@@ -1,31 +1,23 @@
-<div class="card mb-3" style="">
-    <div class="row g-0">
-      <div class="col-md-1 p-2">
-        <img src={{article.image}} class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-11">
-        <div class="card-body">
-          <h5 class="card-title">{{article.title}}</h5>
-          <p class="card-text">{{article.description}}</p> 
-          <div class="row text-center">
-            <div class="col"><b>{{article.category}}</b></div>
-            <div class="col">
-                <i class="text-success">{{article.count}}</i><br>
-                <b>Note : {{article.rate}}</b>
-            </div>
-            <div class="col">
-              <h4 class="text-danger">{{article.price}} $</h4>
-              <div class="row">
-                <div class="col"><a class="btn btn-primary" [routerLink]="['/articles', article.id]">Voir plus</a></div>
-                  
-                <div class="col"><a class="btn btn-warning" [routerLink]="['/edit', article.id]">Modifier</a></div>
-                
-                <div class="col"><a class="btn btn-danger" (click)="delete(article.id)">Supprimer</a></div>
-                
-            </div>
-            </div> 
-          </div>
-        </div>
-      </div>
+<div class="card shadow-sm w-100 d-flex flex-column p-3">
+  <!-- Image centrée et réduite -->
+  <div class="text-center">
+    <img [src]="article.image" class="img-fluid rounded" alt="Image de l'article" style="height: 120px; width: auto; object-fit: contain;">
+  </div>
+
+  <!-- Contenu de l'article -->
+  <div class="card-body d-flex flex-column text-center">
+    <h6 class="card-title fw-bold">{{ article.title }}</h6>
+
+    <div class="d-flex justify-content-center align-items-center gap-2">
+      <span class="badge bg-primary">{{ article.category }}</span>
+      <h6 class="text-danger fw-bold mb-0">{{ article.price }} $</h6>
+    </div>
+
+    <!-- Boutons d'action centrés et plus petits -->
+    <div class="d-flex flex-column gap-2 mt-3">
+      <a class="btn btn-sm btn-outline-primary" [routerLink]="['/articles', article.id]">Voir plus</a>
+      <a class="btn btn-sm btn-outline-warning" [routerLink]="['/edit', article.id]">Modifier</a>
+      <button class="btn btn-sm btn-outline-danger" (click)="delete()">Supprimer</button>
     </div>
   </div>
+</div>

@@ -17,6 +17,14 @@ export class SingleComponent {
 
   ngOnInit(){
     this.articleId = Number(this.route.snapshot.paramMap.get('id')!)
-    this.article= this.service.getOne(this.articleId)
+    this.service.getOne(this.articleId).subscribe({
+      next: (res : Article) => {
+        this.article = res
+      },
+      error: (err) => {
+        console.error('Erreur de récupération de l\'article :', err);
+        alert('Erreur lors de la récupération de l\'article.');
+      }
+    })
   }
 }

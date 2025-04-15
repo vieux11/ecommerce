@@ -1,10 +1,48 @@
+
+
 <div class="container py-5">
-    <h1 class="my-5">Les articles API</h1>
-    <p class="text-end">
-        <a class="btn btn-primary" [routerLink]="['/create']">Ajouter</a>
-    </p>
-   
-    <app-article  *ngFor="let article of articles"   [article]="article"></app-article>
-    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="fw-bold">Les articles disponibles</h1>
+      <a class="btn btn-primary" [routerLink]="['/create']">
+        <i class="bi bi-plus-circle"></i> Ajouter un article
+      </a>
+    </div>
+    <!-- Barre de recherche à la place du bouton -->
+  <!-- BARRE DE RECHERCHE -->
+<div class="search-bar container mb-4 mt-3">
+  <div class="input-group shadow-sm">
+    <!-- <span class="input-group-text bg-white border-end-0">
+      <i class="bi bi-search text-muted"></i>
+    </span> -->
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="filterArticles()"
+      class="form-control border-start-0"
+      placeholder="Rechercher un article par titre ou catégorie..."
+    />
+  </div>
 </div>
+
+<div
+class="custom-toast alert alert-success d-flex align-items-center justify-content-between shadow"
+*ngIf="showToast"
+role="alert"
+>
+<div>
+  <i class="bi bi-check-circle-fill me-2"></i>
+  {{ toastMessage }}
+</div>
+<button type="button" class="btn-close" (click)="showToast = false" aria-label="Fermer"></button>
+</div>
+
+  
+    <div class="row">
+      <div class="col-md-6 col-lg-4 d-flex" *ngFor="let article of filteredArticles" >
+        <app-article [article]="article" (deleted)="onArticleDeleted($event)" class="w-100"></app-article>
+      </div>
+    </div>
+  </div>
+  
+  
 

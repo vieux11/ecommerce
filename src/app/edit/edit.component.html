@@ -1,23 +1,70 @@
 <div class="container py-5">
-    <h1 class="my-5">Modifier un article</h1>
-    <div *ngIf="isOpen" class="alert alert-success alert-dismissible fade show" role="alert">
-        Modification réussi!
-        <button (click)="close()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <h1 class="text-center text-primary mb-4">Modifier un article</h1>
+    
+    <!-- Alerte de succès -->
+    <div *ngIf="isOpen" class="alert alert-success d-flex align-items-center justify-content-between shadow-sm" role="alert">
+      <div>
+        <i class="bi bi-check-circle-fill me-2"></i> Modification réussie!
+      </div>
+      <button (click)="close()" type="button" class="btn-close" aria-label="Close"></button>
     </div>
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <form  [formGroup]="applyForm"  (submit)="edit()">
-                <p>Titre : <input type="text" formControlName="title" class="form-control"></p>
-                <p>Catégorie : <input type="text" formControlName="category" class="form-control"></p>
-                <p>Prix : <input type="text" formControlName="price" formclass="form-control"></p>
-                <p>Image : <input type="text" formControlName="image" class="form-control"></p>
-                <p>Note : <input type="text" formControlName="rate" class="form-control"></p>
-                <p>Stock : <input type="text" formControlName="count" class="form-control"></p>
-                <p>Description : <textarea name="" id="" formControlName="description" class="form-control"></textarea></p>
-                <p><button type="submit" class="btn btn-primary">editer</button></p>
-            </form>
+    
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card p-4 shadow-sm">
+          <form [formGroup]="applyForm" (ngSubmit)="edit()">
+            <!-- Titre -->
+            <div class="mb-3">
+              <label for="title" class="form-label fw-bold">Titre</label>
+              <input type="text" id="title" formControlName="title" class="form-control" placeholder="Nom de l'article">
+            </div>
+            
+            <!-- Catégorie -->
+            <div class="mb-3">
+              <label for="category" class="form-label fw-bold">Catégorie</label>
+              <input type="text" id="category" formControlName="category" class="form-control" placeholder="Catégorie">
+            </div>
+            
+            <!-- Prix et Stock -->
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="price" class="form-label fw-bold">Prix</label>
+                <input type="number" id="price" formControlName="price" class="form-control" placeholder="Prix">
+              </div>
+              <div class="col-md-6">
+                <label for="count" class="form-label fw-bold">Stock</label>
+                <input type="number" id="count" formControlName="count" class="form-control" placeholder="Quantité en stock">
+              </div>
+            </div>
+            
+            <!-- Image -->
+            <div class="mb-3 mt-3">
+              <label for="image" class="form-label fw-bold">Image (URL)</label>
+              <input type="text" id="image" formControlName="image" class="form-control" placeholder="Lien de l'image">
+            </div>
+            
+            <!-- Note -->
+            <div class="mb-3">
+              <label for="rate" class="form-label fw-bold">Note</label>
+              <input type="number" id="rate" formControlName="rate" class="form-control" placeholder="Note" min="0" max="5" step="0.1">
+            </div>
+            
+            <!-- Description -->
+            <div class="mb-3">
+              <label for="description" class="form-label fw-bold">Description</label>
+              <textarea id="description" formControlName="description" class="form-control" rows="3" placeholder="Description de l'article"></textarea>
+            </div>
+            
+            <!-- Bouton de soumission -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary w-50">
+                <i class="bi bi-pencil-square me-1"></i> Éditer
+              </button>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+  
 

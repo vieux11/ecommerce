@@ -1,7 +1,8 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Article } from '../models/article';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ArticleService } from '../services/article.service';
+
 
 @Component({
   selector: 'app-article',
@@ -11,14 +12,25 @@ import { ArticleService } from '../services/article.service';
 })
 export class ArticleComponent {
   @Input() article! : Article
+  @Output() deleted = new EventEmitter<number>();
+  route : ActivatedRoute= inject(ActivatedRoute)
+  router : Router = inject(Router)
   service: ArticleService = inject(ArticleService)
 
-  delete(id:number){
+  delete(){
+
     if(confirm("voulez-vous supprimer cet article?")){
-      this.service.destroyApi(id).then((articleApi)=>{ 
-        const index = this.service.articles.findIndex( article=> article.id == id)
-        this.service.articles.splice(index, 1)
-        alert(articleApi.message)
+      this.service.destroyApi(this.article.id).subscribe({
+        next: (res) => {
+          //alert(res.message);
+          // Rediriger ou recharger si besoin :
+          this.deleted.emit(this.article.id);
+          //this.router.navigate(['/articles-api']);
+        },
+        error: (err) => {
+          console.error('Erreur de suppression :', err);
+          alert('Erreur lors de la suppression.');
+        }
       })
     }
   }
